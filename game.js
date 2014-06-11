@@ -6,7 +6,7 @@ $(document).ready(function(){
   var gameBoard = new Board();
   gameBoard.build_board();
   gameBoard.board_full();
-  debugger;
+  // debugger;
   // draw function
   // update function
 });

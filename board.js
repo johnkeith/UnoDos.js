@@ -11,8 +11,7 @@ Board.prototype.build_board = function() {
   for (var i = 0; i < 5; i++) {
     row = [];
     for( var j = 0; j < 5; j++) {
-      // row.push(new Tile)
-      row.push("J");
+      row.push(new Tile())
     }
     this.board.push(row);
   }
