@@ -1,5 +1,6 @@
 function Board () {
   this.board = [];
+
   this.letters = ["U","N","O","D","O",
                   "U","N","O","O","S",
                   "U","N","O","D","S",
@@ -67,13 +68,16 @@ Board.prototype.word_center_horz = function(row, col) {
          this.board[row][col + 1].contents == "D" && this.board[row][col - 1].contents == "S";
 };
 
- // def word_center_vert?(x, y)
- //    @board[x + 1][y].content == "S" && @board[x - 1][y].content == "D" ||
- //    @board[x + 1][y].content == "D" && @board[x - 1][y].content == "S"
- //  end
+Board.prototype.find_o_on_board = function() {
+  o_on_board = []
+  $.each(this.board, function(idx_row, row) {
+    $.each(row, function(idx_col, col) {
+      if (col.contents == "O") {
+        o_on_board.push([idx_row, idx_col]);
+      }
+    });
+  });
+  return o_on_board
+};
 
- //  def word_center_horz?(x, y)
- //    @board[x][y + 1].content == "S" && @board[x][y - 1].content == "D" ||
- //    @board[x][y + 1].content == "D" && @board[x][y - 1].content == "S"
- //  end
-
+// $.each(gameBoard.board, function(idx, row) { $.each(row, function(idx_col, col) {console.log(col)}) })

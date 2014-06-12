@@ -1,3 +1,3 @@
 function Tile(contents) {
-  this.contents = typeof contents !== 'undefined' ? contents : " ";
+  this.contents = typeof contents !== 'undefined' ? contents : "O";
 };
