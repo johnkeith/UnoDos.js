@@ -32,7 +32,7 @@ Board.prototype.board_full = function() {
       return false
     } else {
       $.each(row, function(index, col) {
-        if (col == " ") {
+        if (col.contents == " ") {
           empty = false;
         };
       });
