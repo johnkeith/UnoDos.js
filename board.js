@@ -40,3 +40,40 @@ Board.prototype.board_full = function() {
   });
   return empty;
 };
+
+Board.prototype.word_up = function(row, col) {
+  return this.board[row - 1][col].contents == "N" && this.board[row - 2][col].contents == "U";
+};
+
+Board.prototype.word_down = function(row, col) {
+  return this.board[row + 1][col].contents == "N" && this.board[row + 2][col].contents == "U";
+};
+
+Board.prototype.word_left = function(row, col) {
+  return this.board[row][col - 1].contents == "N" && this.board[row][col - 2].contents == "U";
+};
+
+Board.prototype.word_right = function(row, col) {
+  return this.board[row][col + 1].contents == "N" && this.board[row][col + 2].contents == "U";
+};
+
+Board.prototype.word_center_vert = function(row, col) {
+  return this.board[row + 1][col].contents == "S" && this.board[row - 1][col].contents == "D" ||
+         this.board[row + 1][col].contents == "D" && this.board[row - 1][col].contents == "S";
+}; 
+
+Board.prototype.word_center_horz = function(row, col) {
+  return this.board[row][col + 1].contents == "S" && this.board[row][col - 1].contents == "D" ||
+         this.board[row][col + 1].contents == "D" && this.board[row][col - 1].contents == "S";
+};
+
+ // def word_center_vert?(x, y)
+ //    @board[x + 1][y].content == "S" && @board[x - 1][y].content == "D" ||
+ //    @board[x + 1][y].content == "D" && @board[x - 1][y].content == "S"
+ //  end
+
+ //  def word_center_horz?(x, y)
+ //    @board[x][y + 1].content == "S" && @board[x][y - 1].content == "D" ||
+ //    @board[x][y + 1].content == "D" && @board[x][y - 1].content == "S"
+ //  end
+
