@@ -2,7 +2,7 @@
 // insert timer dot
 // erase timer dots
 
-var Timer = function(timeMax, timerSpeed) {
+function Timer(timeMax, timerSpeed) {
   this.timePassed = 0;
   this.timeMax = timeMax;
   this.timerSpeed = timerSpeed;

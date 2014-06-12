@@ -1,3 +1,3 @@
-var Tile = function(contents) {
+function Tile(contents) {
   this.contents = typeof contents !== 'undefined' ? contents : " ";
 };

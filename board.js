@@ -1,4 +1,4 @@
-var Board = function() {
+function Board () {
   this.board = [];
   this.letters = ["U","N","O","D","O",
                   "U","N","O","O","S",
