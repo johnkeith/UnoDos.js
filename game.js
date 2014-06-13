@@ -6,9 +6,16 @@ $(document).ready(function(){
   var gameBoard = new Board();
   gameBoard.build_board();
   // insert test piece at 2,2
-  gameBoard.board[2][2].contents = "O";
-  gameBoard.board[1][2].contents = "D";
-  gameBoard.board[3][2].contents = "S";
+  gameBoard.board[0][1].contents = "D";
+  gameBoard.board[0][2].contents = "O";
+  gameBoard.board[0][3].contents = "S";
+
+  gameBoard.board[2][2].contents = "U";
+  gameBoard.board[2][3].contents = "N";
+  gameBoard.board[2][4].contents = "O";
+
+  array_os = gameBoard.findOsOnBoard();
+  gameBoard.findWords(array_os);
 
   debugger;
   // gameTimer.timerSpeed = 100;
