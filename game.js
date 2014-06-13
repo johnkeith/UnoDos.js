@@ -17,6 +17,10 @@ $(document).ready(function(){
   array_os = gameBoard.findOsOnBoard();
   gameBoard.findWords(array_os);
 
+  for (var i = 0; i< 100; i++) {
+    console.log(gameBoard.findEmtpyTile());
+  }
+
   debugger;
   // gameTimer.timerSpeed = 100;
   // gameTimer.reset();

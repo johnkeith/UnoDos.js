@@ -19,14 +19,6 @@ Board.prototype.build_board = function() {
   }
 };
 
-Board.prototype.shuffleLetters = function() {
-  this.letters.sort(function() {return 0.5 - Math.random();});
-};
-
-Board.prototype.getLetter = function() {
-  return this.letters.splice(0,1);
-};
-
 Board.prototype.boardFull = function() {
   var empty = true;
   $.each(this.board, function(index, row) {
@@ -42,6 +34,33 @@ Board.prototype.boardFull = function() {
   });
   return empty;
 };
+
+Board.prototype.shuffleLetters = function() {
+  this.letters.sort(function() {return 0.5 - Math.random();});
+};
+
+Board.prototype.getLetter = function() {
+  return this.letters.splice(0,1);
+};
+
+Board.prototype.findEmtpyTile = function() {
+  var emtpyTile = null;
+  while (emtpyTile == null) {
+    var row = Math.floor(Math.random() * this.board.length);
+    var col = Math.floor(Math.random() * this.board[0].length);
+
+    if (this.board[row][col].contents == " ") {
+      emtpyTile = [row, col];
+    }
+  }
+  return emtpyTile;
+};
+
+Board.prototype.insertTile = function(letter, coords) {
+  row = coords[0];
+  col = coords[1];
+  this.board[row][col].contents = letter.toString();
+}
 
 Board.prototype.wordUp = function(row, col) {
   return this.board[row - 1][col].contents == "N" && this.board[row - 2][col].contents == "U";
@@ -74,7 +93,7 @@ Board.prototype.findOsOnBoard = function() {
   $.each(this.board, function(idx_row, row) {
     $.each(row, function(idx_col, col) {
       if (col.contents == "O") {
-        o_on_board.push([idx_row, idx_col]);
+        os_on_board.push([idx_row, idx_col]);
       }
     });
   });
@@ -82,39 +101,45 @@ Board.prototype.findOsOnBoard = function() {
 };
 
 Board.prototype.findWords = function(o_array) {
-  _this = this;
-  word_coords = [];
+  var _this = this;
+  var word_coords = [];
   $.each(o_array, function(index, coords) {
     row = coords[0];
     col = coords[1];
     if (row > 0 && row < 4) {
       if (_this.wordCenterVert(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
     if (row < 3) {
       if (_this.wordDown(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
     if (row > 1) {
       if (_this.wordUp(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
     if (col > 0 && col < 4) {
       if (_this.wordCenterHorz(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
     if (col < 3) {
       if (_this.wordRight(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
     if (col > 1) {
       if (_this.wordLeft(row, col)) {
         _this.raiseScore();
+        word_coords.push([row, col])
       }
     }
   });
