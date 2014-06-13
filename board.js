@@ -62,6 +62,37 @@ Board.prototype.insertTile = function(letter, coords) {
   this.board[row][col].contents = letter.toString();
 }
 
+Board.prototype.checkForEmptyTile = function(direction, coords) {
+  var row = coords[0];
+  var col = coords[1];
+  
+  if (direction == "up") {
+    if (row == 0) {
+      return false;
+    } else {
+      return this.board[row - 1][col].contents == " ";
+    }
+  } else if (direction == "down") {
+    if (row == 4) {
+      return false;
+    } else {
+      return this.board[row + 1][col].contents == " ";
+    }
+  } else if (direction == "left") {
+    if (col == 0) {
+      return false;
+    } else {
+      return this.board[row][col - 1].contents == " ";
+    }
+  } else if (direction == "right") {
+    if (col == 4) {
+      return false
+    } else {
+      return this.board[row][col + 1].contents == " "; 
+    }
+  }
+};
+
 Board.prototype.wordUp = function(row, col) {
   return this.board[row - 1][col].contents == "N" && this.board[row - 2][col].contents == "U";
 };
