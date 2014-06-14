@@ -1,0 +1,23 @@
+.main-container {
+  margin:50px auto;
+  max-width:920px;
+}
+
+.board-container {
+  border:5px solid black;
+  margin:0 auto;
+  padding-top:2.5px;
+  text-align: center;
+  width:560px;
+}
+.board-container .row {
+}
+
+.tile {
+  background-color: black;
+  border:1px solid black;
+  display:inline-block;
+  height:100px;
+  margin:5px;
+  width:100px;
+}

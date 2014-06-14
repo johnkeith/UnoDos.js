@@ -1,7 +1,18 @@
 $(document).ready(function(){
+  _this = this;
+
   var gameBoard = new Board();
   gameBoard.build_board();
   
+  $.each(gameBoard.board, function(row_idx, row) {
+    var rowContainer = "<div data-row='" + row_idx + "' class='row'>";
+    $.each(row, function(col_idx, col) {
+      rowContainer += "<div data-col='" + col_idx + "' class='tile'>" + col.contents + "</div>"
+    });
+    rowContainer += "</div>"
+    $('.board-container').append(rowContainer);
+  });
+
   /////////////////////////////////////
   // fundamental game loop
   // 1. load board
