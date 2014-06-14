@@ -6,6 +6,7 @@ function Timer(timeMax, timerSpeed) {
   this.timePassed = 0;
   this.timeMax = timeMax;
   this.timerSpeed = timerSpeed;
+  this.container = $('.timer-container');
 }
 
 Timer.prototype.start = function() {
@@ -27,6 +28,7 @@ Timer.prototype.updateTimer = function() {
     this.timePassed = this.timePassed + 1;
   } else {
     this.timePassed = 0;
+    this.container.trigger('reset');
   }
 };
 

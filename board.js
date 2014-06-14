@@ -62,10 +62,11 @@ Board.prototype.insertTile = function(letter, coords) {
   this.board[row][col].contents = letter.toString();
 }
 
+// returns true if space empty, false if filled or off board
 Board.prototype.checkForEmptyTile = function(direction, coords) {
   var row = coords[0];
   var col = coords[1];
-  
+
   if (direction == "up") {
     if (row == 0) {
       return false;
