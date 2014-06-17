@@ -3,15 +3,51 @@ $(document).ready(function(){
 
   var gameBoard = new Board();
   gameBoard.build_board();
+
+  gameBoard.board[0][1].contents = "D";
+  gameBoard.board[0][2].contents = "O";
+  gameBoard.board[0][3].contents = "S";
+
+  gameBoard.board[2][2].contents = "U";
+  gameBoard.board[2][3].contents = "N";
+  gameBoard.board[2][4].contents = "O";
   
-  $.each(gameBoard.board, function(row_idx, row) {
-    var rowContainer = "<div data-row='" + row_idx + "' class='row'>";
-    $.each(row, function(col_idx, col) {
-      rowContainer += "<div data-col='" + col_idx + "' class='tile'>" + col.contents + "</div>"
+  function drawBoard() {
+    $.each(gameBoard.board, function(row_idx, row) {
+      var rowContainer = "<div class='row'>";
+      $.each(row, function(col_idx, col) {
+        rowContainer += "<div data-row='" + row_idx + "' data-col='" + col_idx + "' class='tile'>" +
+                        "<div class='up-button'></div><div class='down-button'></div>" +
+                        "<div class='right-button'></div><div class='left-button'></div>" +
+                        "<div class='contents'>" + col.contents + "</div> </div>"
+      });
+      rowContainer += "</div>"
+      $('.board-container').append(rowContainer);
     });
-    rowContainer += "</div>"
-    $('.board-container').append(rowContainer);
+  }
+  drawBoard();
+
+  // button listeners
+
+  $('.up-button').click(function() {
+    var row = parseInt($(this).parent().attr('data-row'))
+    var col = parseInt($(this).parent().attr('data-col'))
+    var rowUp = parseInt($(this).parent().attr('data-row') - 1)
+
+    if (gameBoard.checkForEmptyTile("up", [row, col])) {
+      clickedContents = gameBoard.board[row][col].contents;
+      $(this).parent().find('.contents').html(" ");
+      $(".tile[data-row=" + rowUp +"][data-col=" + col +"]").find('.contents').html(clickedContents);
+      gameBoard.board[row - 1][col].contents = clickedContents;
+      gameBoard.board[row][col].contents =  " ";
+    }
   });
+
+
+
+  // $('.up-button').click(function(){
+  //   alert($(this).parent().attr('data-row'));
+  // });
 
   /////////////////////////////////////
   // fundamental game loop
@@ -43,13 +79,7 @@ $(document).ready(function(){
   // gameTimer.start();
 
   // // insert test piece at 2,2
-  // gameBoard.board[0][1].contents = "D";
-  // gameBoard.board[0][2].contents = "O";
-  // gameBoard.board[0][3].contents = "S";
 
-  // gameBoard.board[2][2].contents = "U";
-  // gameBoard.board[2][3].contents = "N";
-  // gameBoard.board[2][4].contents = "O";
 
   // array_os = gameBoard.findOsOnBoard();
   // gameBoard.findWords(array_os);
