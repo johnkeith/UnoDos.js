@@ -1,5 +1,22 @@
 $(document).ready(function(){
   _this = this;
+  this.timePassed = 0;
+  this.timeMax = 2;
+  this.timerSpeed = 1000;
+
+  // Timer function to trigger insert new tiles
+
+  var timer = setInterval(function(){
+    if (_this.timePassed < _this.timeMax) {
+      _this.timePassed = _this.timePassed + 1;
+    } else {
+      _this.timePassed = 0;
+      checkAndInsert();
+    }
+    $(".timer-container").html(_this.timePassed)
+  }, _this.timerSpeed);
+  
+  
 
   var gameBoard = new Board();
   gameBoard.build_board();
@@ -9,7 +26,7 @@ $(document).ready(function(){
   gameBoard.board[0][3].contents = "S";
 
   gameBoard.board[2][2].contents = "U";
-  gameBoard.board[2][3].contents = "N";
+  gameBoard.board[3][3].contents = "N";
   gameBoard.board[2][4].contents = "O";
   
   function drawBoard() {
@@ -41,6 +58,8 @@ $(document).ready(function(){
       $(".tile[data-row=" + rowUp + "][data-col=" + col +"]").find('.contents').html(clickedContents);
       gameBoard.board[row - 1][col].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
+      findAndRemoveWords();
+      printScore();
     }
   });
 
@@ -55,6 +74,8 @@ $(document).ready(function(){
       $(".tile[data-row=" + rowDown + "][data-col=" + col + "]").find('.contents').html(clickedContents);
       gameBoard.board[row + 1][col].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
+      findAndRemoveWords();
+      printScore();
     }
   });
 
@@ -69,6 +90,8 @@ $(document).ready(function(){
       $(".tile[data-row=" + row + "][data-col=" + colRight + "]").find('.contents').html(clickedContents);
       gameBoard.board[row][col + 1].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
+      findAndRemoveWords();
+      printScore();
     }
   });
 
@@ -83,12 +106,56 @@ $(document).ready(function(){
       $(".tile[data-row=" + row + "][data-col=" + colRight + "]").find('.contents').html(clickedContents);
       gameBoard.board[row][col - 1].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
+      findAndRemoveWords();
+      printScore();
     }
   });
 
   // END Move Listeners //
 
-  
+  function findAndRemoveWords() {
+    os_on_board = gameBoard.findOsOnBoard();
+    word_coords = gameBoard.findWords(os_on_board);
+
+    gameBoard.addWordColor(word_coords);
+
+    gameBoard.raiseScore(word_coords);
+
+    gameBoard.removeWords(word_coords);
+
+    gameBoard.removeWordColor(word_coords);
+  };
+
+  function checkAndInsert() {
+    if (gameBoard.boardFull() == true) {
+      alert("Game Over!")
+    } else {
+      gameBoard.shuffleLetters();
+      letter = gameBoard.getLetter();
+      emptyTile = gameBoard.findEmptyTile();
+      gameBoard.insertTile(letter, emptyTile);
+      gameBoard.showNewTileLetter(emptyTile);
+      findAndRemoveWords();
+    }
+  };
+
+  // function checkScoreModifyTimer() {
+  //   if (gameBoard.score > 15) {
+  //     clearInterval(timer);
+  //     this.timerSpeed = 250;
+  //   } else if (gameBoard.score > 10) {
+  //     clearInterval(timer);
+  //     this.timerSpeed = 500;
+  //   } else if (gameBoard.score > 5) {
+  //     clearInterval(timer);
+  //     this.timerSpeed = 750;
+  //   }
+  // };
+
+  function printScore() {
+    $("score-container").html(gameBoard.score);
+  };
+
   /////////////////////////////////////
   // fundamental game loop
   // 1. load board
@@ -110,7 +177,7 @@ $(document).ready(function(){
   //     check for words
   //       remove words when found *
   //       animate removal *
-  //     check if board full(game over)
+  //  
   //       if not check if score is above threshold
   /////////////////////////////////////
 

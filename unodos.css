@@ -59,3 +59,8 @@
 .right-button {
   right:0;
 }
+
+.score-container, .timer-container {
+  font-size: 3em;
+  text-align: center;
+}

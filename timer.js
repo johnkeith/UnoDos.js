@@ -9,7 +9,7 @@ function Timer(timeMax, timerSpeed) {
   this.container = $('.timer-container');
 }
 
-Timer.prototype.start = function() {
+Timer.prototype.startTimer = function() {
   var _this = this;
 
   _this.timerRunning = setInterval(function() {
@@ -18,7 +18,7 @@ Timer.prototype.start = function() {
   }, this.timerSpeed);
 };
 
-Timer.prototype.reset = function() {
+Timer.prototype.resetTimer = function() {
   delete this.timerRunning;
   this.start();
 };
@@ -28,7 +28,7 @@ Timer.prototype.updateTimer = function() {
     this.timePassed = this.timePassed + 1;
   } else {
     this.timePassed = 0;
-    this.container.trigger('reset');
+    checkAndInsert();
   }
 };
 

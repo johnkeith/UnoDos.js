@@ -43,23 +43,23 @@ Board.prototype.getLetter = function() {
   return this.letters.splice(0,1);
 };
 
-Board.prototype.findEmtpyTile = function() {
-  var emtpyTile = null;
-  while (emtpyTile == null) {
+Board.prototype.findEmptyTile = function() {
+  var emptyTile = null;
+  while (emptyTile == null) {
     var row = Math.floor(Math.random() * this.board.length);
     var col = Math.floor(Math.random() * this.board[0].length);
 
     if (this.board[row][col].contents == " ") {
-      emtpyTile = [row, col];
+      emptyTile = [row, col];
     }
   }
-  return emtpyTile;
+  return emptyTile;
 };
 
 Board.prototype.insertTile = function(letter, coords) {
   row = coords[0];
   col = coords[1];
-  this.board[row][col].contents = letter.toString();
+  this.board[row][col].contents = letter[0];
 }
 
 // returns true if space empty, false if filled or off board
@@ -140,38 +140,44 @@ Board.prototype.findWords = function(o_array) {
     col = coords[1];
     if (row > 0 && row < 4) {
       if (_this.wordCenterVert(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row + 1, col])
+        word_coords.push([row - 1, col])
       }
     }
     if (row < 3) {
       if (_this.wordDown(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row + 1, col])
+        word_coords.push([row + 2, col])
       }
     }
     if (row > 1) {
       if (_this.wordUp(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row - 1, col])
+        word_coords.push([row - 2, col])
       }
     }
     if (col > 0 && col < 4) {
       if (_this.wordCenterHorz(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row, col + 1])
+        word_coords.push([row, col - 1])
       }
     }
     if (col < 3) {
       if (_this.wordRight(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row, col + 1])
+        word_coords.push([row, col + 2])
       }
     }
     if (col > 1) {
       if (_this.wordLeft(row, col)) {
-        _this.raiseScore();
         word_coords.push([row, col])
+        word_coords.push([row, col - 1])
+        word_coords.push([row, col - 2])
       }
     }
   });
@@ -179,11 +185,38 @@ Board.prototype.findWords = function(o_array) {
 };
 
 Board.prototype.removeWords = function(word_coords) {
-  $.each(word_coords, function(index, coords) {
+  _removeWordsThis = this;
+  setTimeout(function() {
+    $.each(word_coords, function(index, coords) {
+      _removeWordsThis.board[coords[0]][coords[1]].contents = " ";
+      $(".tile[data-row=" + coords[0] + "][data-col=" + coords[1] + "]").find('.contents').html(" ");
+    });
+  }, 500);
+};
 
+Board.prototype.addWordColor = function(word_coords) {
+  $.each(word_coords, function(index, coords) {
+    $(".tile[data-row=" + coords[0] + "][data-col=" + coords[1] + "]").animate({
+      backgroundColor: "#fff" }, 500);
   });
 };
 
-Board.prototype.raiseScore = function() {
-  this.score += 1
+Board.prototype.removeWordColor = function(word_coords) {
+  $.each(word_coords, function(index, coords) {
+    $(".tile[data-row=" + coords[0] + "][data-col=" + coords[1] + "]").animate({
+      backgroundColor: "#000" }, 500);
+  });
+};
+
+Board.prototype.showNewTileLetter = function(coords) {
+  row = coords[0];
+  col = coords[1];
+  newLetter = this.board[row][col].contents;
+  $(".tile[data-row=" + row + "][data-col=" + col + "]").find('.contents').fadeOut(250, function(){
+    $(this).html(newLetter).fadeIn(250)
+  });
+};
+
+Board.prototype.raiseScore = function(word_coords) {
+  this.score += word_coords.length / 3;
 };
