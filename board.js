@@ -178,6 +178,12 @@ Board.prototype.findWords = function(o_array) {
   return word_coords;
 };
 
+Board.prototype.removeWords = function(word_coords) {
+  $.each(word_coords, function(index, coords) {
+
+  });
+};
+
 Board.prototype.raiseScore = function() {
   this.score += 1
 };

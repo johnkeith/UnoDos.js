@@ -17,9 +17,10 @@ $(document).ready(function(){
       var rowContainer = "<div class='row'>";
       $.each(row, function(col_idx, col) {
         rowContainer += "<div data-row='" + row_idx + "' data-col='" + col_idx + "' class='tile'>" +
+                        "<div class='contents'>" + col.contents + "</div>" +
                         "<div class='up-button'></div><div class='down-button'></div>" +
                         "<div class='right-button'></div><div class='left-button'></div>" +
-                        "<div class='contents'>" + col.contents + "</div> </div>"
+                        "</div>"
       });
       rowContainer += "</div>"
       $('.board-container').append(rowContainer);
@@ -27,28 +28,67 @@ $(document).ready(function(){
   }
   drawBoard();
 
-  // button listeners
+  // Move Listeners //
 
   $('.up-button').click(function() {
     var row = parseInt($(this).parent().attr('data-row'))
     var col = parseInt($(this).parent().attr('data-col'))
-    var rowUp = parseInt($(this).parent().attr('data-row') - 1)
+    var rowUp = parseInt($(this).parent().attr('data-row')) - 1
 
     if (gameBoard.checkForEmptyTile("up", [row, col])) {
       clickedContents = gameBoard.board[row][col].contents;
       $(this).parent().find('.contents').html(" ");
-      $(".tile[data-row=" + rowUp +"][data-col=" + col +"]").find('.contents').html(clickedContents);
+      $(".tile[data-row=" + rowUp + "][data-col=" + col +"]").find('.contents').html(clickedContents);
       gameBoard.board[row - 1][col].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
     }
   });
 
+  $('.down-button').click(function() {
+    var row = parseInt($(this).parent().attr('data-row'))
+    var col = parseInt($(this).parent().attr('data-col'))
+    var rowDown = parseInt($(this).parent().attr('data-row')) + 1
+    
+    if (gameBoard.checkForEmptyTile("down", [row, col])) {
+      clickedContents = gameBoard.board[row][col].contents;
+      $(this).parent().find('.contents').html(" ");
+      $(".tile[data-row=" + rowDown + "][data-col=" + col + "]").find('.contents').html(clickedContents);
+      gameBoard.board[row + 1][col].contents = clickedContents;
+      gameBoard.board[row][col].contents =  " ";
+    }
+  });
 
+  $('.right-button').click(function() {
+    var row = parseInt($(this).parent().attr('data-row'))
+    var col = parseInt($(this).parent().attr('data-col'))
+    var colRight = parseInt($(this).parent().attr('data-col')) + 1
+    
+    if (gameBoard.checkForEmptyTile("right", [row, col])) {
+      clickedContents = gameBoard.board[row][col].contents;
+      $(this).parent().find('.contents').html(" ");
+      $(".tile[data-row=" + row + "][data-col=" + colRight + "]").find('.contents').html(clickedContents);
+      gameBoard.board[row][col + 1].contents = clickedContents;
+      gameBoard.board[row][col].contents =  " ";
+    }
+  });
 
-  // $('.up-button').click(function(){
-  //   alert($(this).parent().attr('data-row'));
-  // });
+  $('.left-button').click(function() {
+    var row = parseInt($(this).parent().attr('data-row'))
+    var col = parseInt($(this).parent().attr('data-col'))
+    var colRight = parseInt($(this).parent().attr('data-col')) - 1
+    
+    if (gameBoard.checkForEmptyTile("left", [row, col])) {
+      clickedContents = gameBoard.board[row][col].contents;
+      $(this).parent().find('.contents').html(" ");
+      $(".tile[data-row=" + row + "][data-col=" + colRight + "]").find('.contents').html(clickedContents);
+      gameBoard.board[row][col - 1].contents = clickedContents;
+      gameBoard.board[row][col].contents =  " ";
+    }
+  });
 
+  // END Move Listeners //
+
+  
   /////////////////////////////////////
   // fundamental game loop
   // 1. load board
