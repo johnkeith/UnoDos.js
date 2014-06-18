@@ -6,7 +6,7 @@ $(document).ready(function(){
 
   // Timer function to trigger insert new tiles
 
-  var timer = setInterval(function(){
+  this.timer = setInterval(function(){
     if (_this.timePassed < _this.timeMax) {
       _this.timePassed = _this.timePassed + 1;
     } else {
@@ -16,13 +16,13 @@ $(document).ready(function(){
     $(".timer-container").html(_this.timePassed)
   }, _this.timerSpeed);
   
-  
-
   var gameBoard = new Board();
   gameBoard.build_board();
 
+  printScore();
+
   gameBoard.board[0][1].contents = "D";
-  gameBoard.board[0][2].contents = "O";
+  gameBoard.board[1][2].contents = "O";
   gameBoard.board[0][3].contents = "S";
 
   gameBoard.board[2][2].contents = "U";
@@ -59,6 +59,7 @@ $(document).ready(function(){
       gameBoard.board[row - 1][col].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
       findAndRemoveWords();
+      checkScoreModifyTimer();
       printScore();
     }
   });
@@ -75,6 +76,7 @@ $(document).ready(function(){
       gameBoard.board[row + 1][col].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
       findAndRemoveWords();
+      checkScoreModifyTimer();
       printScore();
     }
   });
@@ -91,6 +93,7 @@ $(document).ready(function(){
       gameBoard.board[row][col + 1].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
       findAndRemoveWords();
+      checkScoreModifyTimer();
       printScore();
     }
   });
@@ -107,6 +110,7 @@ $(document).ready(function(){
       gameBoard.board[row][col - 1].contents = clickedContents;
       gameBoard.board[row][col].contents =  " ";
       findAndRemoveWords();
+      checkScoreModifyTimer();
       printScore();
     }
   });
@@ -124,6 +128,8 @@ $(document).ready(function(){
     gameBoard.removeWords(word_coords);
 
     gameBoard.removeWordColor(word_coords);
+
+    printScore();
   };
 
   function checkAndInsert() {
@@ -136,24 +142,27 @@ $(document).ready(function(){
       gameBoard.insertTile(letter, emptyTile);
       gameBoard.showNewTileLetter(emptyTile);
       findAndRemoveWords();
+      checkScoreModifyTimer();
     }
   };
 
-  // function checkScoreModifyTimer() {
-  //   if (gameBoard.score > 15) {
-  //     clearInterval(timer);
-  //     this.timerSpeed = 250;
-  //   } else if (gameBoard.score > 10) {
-  //     clearInterval(timer);
-  //     this.timerSpeed = 500;
-  //   } else if (gameBoard.score > 5) {
-  //     clearInterval(timer);
-  //     this.timerSpeed = 750;
-  //   }
-  // };
+  function checkScoreModifyTimer() {
+    if (gameBoard.score > 15) {
+      clearInterval(_this.timer);
+      _this.timerSpeed = 250;
+      
+    } else if (gameBoard.score > 10) {
+      clearInterval(_this.timer);
+      _this.timerSpeed = 500;
+    } else if (gameBoard.score > 1) {
+      debugger;
+      clearInterval(_this.timer);
+      _this.timerSpeed = 750;
+    }
+  };
 
   function printScore() {
-    $("score-container").html(gameBoard.score);
+    $(".score-container").html(gameBoard.score);
   };
 
   /////////////////////////////////////

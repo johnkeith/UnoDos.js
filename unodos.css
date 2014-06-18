@@ -1,5 +1,5 @@
 .main-container {
-  margin:50px auto;
+  margin:0 auto;
   max-width:920px;
 }
 
@@ -58,6 +58,11 @@
 
 .right-button {
   right:0;
+}
+
+.up-button:hover, .down-button:hover, 
+.left-button:hover, .right-button:hover {
+  background:rgb(119,119,119);
 }
 
 .score-container, .timer-container {

@@ -1,11 +1,6 @@
 function Board () {
   this.board = [];
-
-  this.letters = ["U","N","O","D","O",
-                  "U","N","O","O","S",
-                  "U","N","O","D","S",
-                  "U","O","O","D","S",
-                  "O","N","O","D","S"];
+  this.letters = ["U","N","O","D","S"]
   this.score = 0;
 };
 
@@ -40,7 +35,7 @@ Board.prototype.shuffleLetters = function() {
 };
 
 Board.prototype.getLetter = function() {
-  return this.letters.splice(0,1);
+  return this.letters[0];
 };
 
 Board.prototype.findEmptyTile = function() {
