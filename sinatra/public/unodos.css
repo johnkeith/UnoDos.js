@@ -194,4 +194,10 @@ body {
 .timer-box-03 {
   color: #10239B ;
 }
+.score-form {
+  display: none;
+  width:100%;
+  height:100%;
+  z-index: 1000;
+}
 

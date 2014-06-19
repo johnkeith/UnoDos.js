@@ -14,6 +14,12 @@
     .timer-box-01
     .timer-box-02
     .timer-box-03
+  .score-form
+    .score-form-header
+    %form{:method => 'post', :action => '/game', :id => "score-form"}
+      %input{:name => "player_name", :type => "hidden", :value => "", :id => "player-name"}
+      %input{:name => "score", :type => "hidden", :value => "", :id => "score"}
+      %input{:type => "submit", :value => "Post Score"}
 %script{:src => "jquery.color-2.1.2.min.js"}
 %script{:src => "board.js"}
 %script{:src => "tile.js"}

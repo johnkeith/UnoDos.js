@@ -19,6 +19,8 @@ get '/game' do
 end
 
 post '/game' do
+  @name = params[:player_name]
+  @score = params[:score]
   redirect '/highscores'
 end
 
