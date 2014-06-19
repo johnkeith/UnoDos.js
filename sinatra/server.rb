@@ -2,7 +2,6 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
-# require 'pry'
 
 # require all of the models and view templates
 Dir['app/**/*.rb'].each { |file| require_relative file }
@@ -19,11 +18,11 @@ get '/game' do
 end
 
 post '/game' do
-  @name = params[:player_name]
-  @score = params[:score]
+  Score.create(player_name: params[:player_name], score: params[:score])
   redirect '/highscores'
 end
 
 get '/highscores' do
+  @scores = Score.all
   haml :highscores
 end

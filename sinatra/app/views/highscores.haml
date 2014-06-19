@@ -1,0 +1,15 @@
+.main-container
+  %h1.inst_title
+    .extra-text High scores for 
+    .letter1 u
+    .letter2 n
+    .letter3 o
+    .letter4 d
+    .letter5 o
+    .letter6 s
+  .play-button
+    %a.animate{:href => "/game"} Play Again >>
+  %ol.scores-table
+  - @scores.each do |score|
+    %li= score.player_name
+    %li= score.score

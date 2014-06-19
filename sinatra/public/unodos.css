@@ -15,8 +15,9 @@ body {
 .gif-centered{
   text-align: center;
 }
-
-
+.scores-table li {
+  display:inline;
+}
 .title {
   font-size: 4em;
   margin-bottom: -25px;
@@ -47,9 +48,10 @@ body {
   color: #10239B;
 }
 
-.welcome {
+.extra-text {
   display: inline;
 }
+
 .play-button {
   display: inline;
   color:white;
