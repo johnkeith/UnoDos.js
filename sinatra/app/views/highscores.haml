@@ -9,7 +9,19 @@
     .letter6 s
   .play-button
     %a.animate{:href => "/game"} Play Again >>
-  %ol.scores-table
-  - @scores.each do |score|
-    %li= score.player_name
-    %li= score.score
+  %table.scores-table.pure-table.pure-table-horizontal
+    %thead
+      %tr
+        %td Rank
+        %td Player Name
+        %td Score
+    %tbody
+      - @scores.each_with_index do |score, index|
+        %tr
+          %td= index + 1
+          %td= score.player_name
+          %td= score.score
+  / %ol.scores-table
+  /   - @scores.each do |score|
+  /     %li= score.player_name
+  /     %li= score.score

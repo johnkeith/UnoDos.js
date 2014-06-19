@@ -16,7 +16,7 @@ body {
   text-align: center;
 }
 .scores-table li {
-  display:inline;
+  display:inline-block;
 }
 .title {
   font-size: 4em;
@@ -27,6 +27,13 @@ body {
 .letter1, .letter2, .letter3, .letter4, .letter5, .letter6 {
   display: inline;
   letter-spacing:-10px
+}
+.scores-table {
+  font-size: 1.5em;
+  margin:30px auto;
+}
+.scores-table tr {
+  padding:20px;
 }
 
 .letter1 {
