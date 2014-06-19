@@ -1,23 +1,21 @@
-!!!
-%html
-  %head
-    %meta{:charset => "utf-8"}
-    %meta{:description => "A game of letters and numbers"}
-    %title unodos
-    %link{:rel => "stylesheet", :href => "http://yui.yahooapis.com/pure/0.5.0/pure-min.css"}
-    %link{:rel => "stylesheet", :href => 'http://fonts.googleapis.com/css?family=Oxygen:400,700', :type => 'text/css'}
-    %link{:rel => "stylesheet", :href => "unodos.css"}
-  %body
-    .main-container
-      .title unodos
-      .store-upcoming
-        .score-container
-        .upcoming-container
-      .board-container
-      .timer-container
-    %script{:src => "jquery-1.11.1.min.js"}
-    %script{:src => "jquery.color-2.1.2.min.js"}
-    %script{:src => "board.js"}
-    %script{:src => "tile.js"}
-    %script{:src => "game.js"}
-
+.main-container
+  .title
+    .letter1 u
+    .letter2 n
+    .letter3 o
+    .letter4 d
+    .letter5 o
+    .letter6 s
+  .score-upcoming
+    .score-container
+    .upcoming-container
+  .board-container
+  .timer-container
+    .timer-box-01
+    .timer-box-02
+    .timer-box-03
+%script{:src => "jquery-1.11.1.min.js"}
+%script{:src => "jquery.color-2.1.2.min.js"}
+%script{:src => "board.js"}
+%script{:src => "tile.js"}
+%script{:src => "game.js"}

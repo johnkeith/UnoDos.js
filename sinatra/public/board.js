@@ -218,7 +218,7 @@ Board.prototype.addWordColor = function(word_coords) {
 Board.prototype.removeWordColor = function(word_coords) {
   $.each(word_coords, function(index, coords) {
     $(".tile[data-row=" + coords[0] + "][data-col=" + coords[1] + "]").animate({
-      backgroundColor: "#000" }, 500);
+      backgroundColor: "#333" }, 500);
   });
 };
 

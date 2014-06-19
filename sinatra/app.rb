@@ -11,5 +11,17 @@ Dir['app/**/*.rb'].each { |file| require_relative file }
 set :views, 'app/views'
 
 get '/' do
+  haml :instructions
+end
+
+get '/game' do
   haml :game
+end
+
+post '/game' do
+  redirect '/highscores'
+end
+
+get '/highscores' do
+  haml :highscores
 end

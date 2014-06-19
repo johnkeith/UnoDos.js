@@ -7,13 +7,19 @@ $(document).ready(function(){
   this.timer
   // Timer function to trigger insert new tiles
 
-  function timerDots() {
+  function fillTimerDots() {
+
     if (_this.timePassed == 0){
-      return "&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("");
+      $('.timer-box-03').html("");
     } else if (_this.timePassed == 1) {
-      return "&middot;&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("&middot;");
     } else {
-      return "&middot;&middot;&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("&middot;");
+      $('.timer-box-03').html("&middot;");
     }
   };
 
@@ -25,11 +31,11 @@ $(document).ready(function(){
       _this.timePassed = 0;
       checkAndInsert();
     }
-    $(".timer-container").html(timerDots()); 
+    fillTimerDots();
     }, _this.timerSpeed);
   };
 
-  $(".timer-container").html("&middot;");
+  $(".timer-box-01").html("&middot;");
   this.timer = createTimer();
 
   var gameBoard = new Board();
@@ -39,6 +45,7 @@ $(document).ready(function(){
 
   printUpcoming();
   printScore();
+
 
   gameBoard.board[0][1].contents = "D";
   gameBoard.board[1][2].contents = "O";
@@ -53,7 +60,7 @@ $(document).ready(function(){
       var rowContainer = "<div class='row'>";
       $.each(row, function(col_idx, col) {
         rowContainer += "<div data-row='" + row_idx + "' data-col='" + col_idx + "' class='tile'>" +
-                        "<div class='contents'><p>" + col.contents + "</p></div>" +
+                        "<div class='contents'>" + col.contents + "</div>" +
                         "<div class='up-button'></div><div class='down-button'></div>" +
                         "<div class='right-button'></div><div class='left-button'></div>" +
                         "</div>"
@@ -149,7 +156,7 @@ $(document).ready(function(){
 
   function checkAndInsert() {
     if (gameBoard.boardFull() == true) {
-      alert("Game Over!")
+      //alert("Game Over!")
     } else {
       letter = gameBoard.getLetter();
       emptyTile = gameBoard.findEmptyTile();
@@ -184,12 +191,12 @@ $(document).ready(function(){
   };
 
   function printScore() {
-    $(".score-container").html("<strong>Score: " + gameBoard.score + "</strong>");
+    $(".score-container").html("<strong>Score:</strong> " + gameBoard.score);
   };
 
   function printUpcoming() {
     $(".upcoming-container").html("");
-    var lettersList = "<ul><li>Next: </li>";
+    var lettersList = "<ul><li><strong>Next:</strong> </li>";
     for (var i = 0; i < 5; i++) {
       lettersList += "<li>" + gameBoard.displayLetters[i] + "</li>"
     }
