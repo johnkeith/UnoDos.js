@@ -1,6 +1,50 @@
+* {
+  font-family: 'Oxygen', sans-serif;
+}
+.title {
+  font-size: 5em;
+  text-align: center;
+}
 .main-container {
   margin:0 auto;
   max-width:920px;
+}
+.score-upcoming {
+  margin:0 auto;
+  text-align: center;
+  width:560px;
+}
+.score-container {
+  display:inline-block;
+  font-size: 2em;
+  text-align: left;
+}
+.upcoming-container {
+/*  border-bottom:5px solid black;
+  border-top:5px solid black;
+  border-right:5px solid black;*/
+  display:inline-block;
+  margin:5px auto;
+  text-align: right;
+/*  width:326px;*/
+}
+
+.upcoming-container ul {
+  list-style: none;
+}
+
+.upcoming-container ul li {
+  display:inline;
+  font-size: 2em;
+  margin-left: -3px;
+  padding:15px;
+}
+.upcoming-container ul li:nth-child(2) {
+/*  border:5px solid black;
+  padding:10px 20px 10px 20px;
+*/
+  border-bottom:5px solid black;
+  padding:15px 15px 5px 15px;
 }
 
 .board-container {
@@ -15,6 +59,8 @@
 .board-container .row {
 
 }
+
+
 
 .tile {
   background-color: black;
@@ -66,19 +112,11 @@
   background:rgb(119,119,119);
 }
 
-.score-container, .timer-container {
+.timer-container {
   font-size: 3em;
   text-align: center;
 }
 
-.upcoming-container {
-  border-bottom:5px solid black;
-  border-right:5px solid black;
-  border-left:5px solid black;
-  display:inline-block;
-  margin:5px;
-}
-
-.upcoming-container ul {
-  list-style: none;
+.timer-container {
+  font-size:5em;
 }

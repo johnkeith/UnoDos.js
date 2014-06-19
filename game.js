@@ -7,6 +7,16 @@ $(document).ready(function(){
   this.timer
   // Timer function to trigger insert new tiles
 
+  function timerDots() {
+    if (_this.timePassed == 0){
+      return "&middot;";
+    } else if (_this.timePassed == 1) {
+      return "&middot;&middot;";
+    } else {
+      return "&middot;&middot;&middot;";
+    }
+  };
+
   function createTimer() {
     setInterval(function(){
     if (_this.timePassed < _this.timeMax) {
@@ -15,10 +25,11 @@ $(document).ready(function(){
       _this.timePassed = 0;
       checkAndInsert();
     }
-    $(".timer-container").html(_this.timePassed)
+    $(".timer-container").html(timerDots()); 
     }, _this.timerSpeed);
   };
 
+  $(".timer-container").html("&middot;");
   this.timer = createTimer();
 
   var gameBoard = new Board();
@@ -28,7 +39,6 @@ $(document).ready(function(){
 
   printUpcoming();
   printScore();
-  debugger;
 
   gameBoard.board[0][1].contents = "D";
   gameBoard.board[1][2].contents = "O";
@@ -174,14 +184,14 @@ $(document).ready(function(){
   };
 
   function printScore() {
-    $(".score-container").html(gameBoard.score);
+    $(".score-container").html("<strong>Score: " + gameBoard.score + "</strong>");
   };
 
   function printUpcoming() {
     $(".upcoming-container").html("");
-    var lettersList = "<ul>";
+    var lettersList = "<ul><li>Next: </li>";
     for (var i = 0; i < 5; i++) {
-      lettersList += "<li>" + gameBoard.letters[i] + "</li>"
+      lettersList += "<li>" + gameBoard.displayLetters[i] + "</li>"
     }
     $(".upcoming-container").append(lettersList + "</ul>");
   };

@@ -18,6 +18,7 @@ Board.prototype.getLetter = function() {
     this.displayLetters.push(this.moveToDisplay.splice(0,1).toString());
   }
   return this.displayLetters.splice(0,1);
+
 };
 
 Board.prototype.addLetters = function() {
