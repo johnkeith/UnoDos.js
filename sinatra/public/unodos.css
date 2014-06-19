@@ -11,8 +11,12 @@ body {
 .inst_title {
   font-size: 3em;
   display:inline;
-
 }
+.gif-centered{
+  text-align: center;
+}
+
+
 .title {
   font-size: 4em;
   margin-bottom: -25px;
