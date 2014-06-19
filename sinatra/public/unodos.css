@@ -111,7 +111,7 @@ body {
 }
 
 .board-container {
-  border:5px solid #333;
+  border:3px solid #333;
   color:white;
 /*  display:inline-block;*/
   margin:0 auto;
