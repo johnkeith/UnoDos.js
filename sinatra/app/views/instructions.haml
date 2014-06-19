@@ -9,7 +9,7 @@
     .letter5 o
     .letter6 s
   .play-button
-    %a{:href => "/game"} Play Game <span>>></span>
+    %a.animate{:href => "/game"} Play Game >>
   %h3 
     %em ~ El Mejor Juego Del Mundo ~ 
   %p Señor John Keith & Señor David Pointeau
@@ -28,3 +28,8 @@
   %p
     %strong Example of Moving and Scoring: 
   %img{:src => "unodos_tut.gif"}
+%script{:src => "jquery.textillate.js"}
+%script{:src => "assets/jquery.lettering.js"}
+%script{:src => "assets/jquery.fittext.js"}
+:javascript
+  $(".animate").textillate({in: { effect: 'fadeInDown' }, loop: false, initialDelay: 4});

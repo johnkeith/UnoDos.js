@@ -49,7 +49,7 @@ body {
 .play-button {
   display: inline;
   color:white;
-  margin-left:100px;
+  margin-left:50px;
   background: RGB(27, 173, 223);
   padding:8px;
   -webkit-border-bottom-right-radius: 6px;
@@ -63,9 +63,7 @@ body {
 .play-button:hover {
   background: RGB(0, 190, 255);
 }
-.play-button span {
-  color:RGB(243, 243, 21);
-}
+
 .main-container {
   margin:0 auto;
   max-width:920px;
