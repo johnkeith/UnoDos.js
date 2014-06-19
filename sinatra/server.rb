@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
-require 'pry'
+
 
 # require all of the models and view templates
 Dir['app/**/*.rb'].each { |file| require_relative file }
@@ -24,7 +24,6 @@ post '/game' do
 end
 
 get '/highscores' do
-  binding.pry
   @scores = Score.all
   haml :highscores
 end
