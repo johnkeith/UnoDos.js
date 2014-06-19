@@ -7,13 +7,19 @@ $(document).ready(function(){
   this.timer
   // Timer function to trigger insert new tiles
 
-  function timerDots() {
+  function fillTimerDots() {
+
     if (_this.timePassed == 0){
-      return "&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("");
+      $('.timer-box-03').html("");
     } else if (_this.timePassed == 1) {
-      return "&middot;&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("&middot;");
     } else {
-      return "&middot;&middot;&middot;";
+      $('.timer-box-01').html("&middot;");
+      $('.timer-box-02').html("&middot;");
+      $('.timer-box-03').html("&middot;");
     }
   };
 
@@ -25,11 +31,11 @@ $(document).ready(function(){
       _this.timePassed = 0;
       checkAndInsert();
     }
-    $(".timer-container").html(timerDots()); 
+    fillTimerDots();
     }, _this.timerSpeed);
   };
 
-  $(".timer-container").html("&middot;");
+  $(".timer-box-01").html("&middot;");
   this.timer = createTimer();
 
   var gameBoard = new Board();
@@ -149,7 +155,7 @@ $(document).ready(function(){
 
   function checkAndInsert() {
     if (gameBoard.boardFull() == true) {
-      alert("Game Over!")
+      //alert("Game Over!")
     } else {
       letter = gameBoard.getLetter();
       emptyTile = gameBoard.findEmptyTile();

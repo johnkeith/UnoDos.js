@@ -5,7 +5,32 @@
   font-size: 4em;
   margin-bottom: -25px;
   text-align: center;
+  /*font-family: 'Oxygen', sans-serif;*/
 }
+.letter1, .letter2, .letter3, .letter4, .letter5, .letter6 {
+  display: inline;
+  letter-spacing:-10px
+}
+
+.letter1 {
+  color: #F3F315;
+}
+.letter2 {
+  color: #CCCC00;
+}
+.letter3 {
+  color: #00BEFF ;
+}
+.letter4 {
+  color: #1BADDF;
+}
+.letter5 {
+  color: #1932D1;
+}
+.letter6 {
+  color: #10239B;
+}
+
 .main-container {
   margin:0 auto;
   max-width:920px;
@@ -53,9 +78,10 @@
   color:white;
 /*  display:inline-block;*/
   margin:0 auto;
-  padding-top:2.5px;
+  padding-top:8px;
+  padding-bottom: 6px;
   text-align: center;
-  width:415px;
+  width:430px;
 }
 .board-container .row {
 
@@ -114,9 +140,25 @@
 }
 
 .timer-container {
-  margin-top: -35px ;
+  margin: -35px auto;
   font-size: 5em;
   text-align: center;
 }
+.timer-box-01, .timer-box-02, .timer-box-03 {
+  display:inline-block;
+  text-align: center;
+  font-family: sans-serif;
+}
 
+.timer-box-01 {
+  color: #F3F315;
+}
+
+.timer-box-02 {
+  color: #00BEFF;
+}
+
+.timer-box-03 {
+  color: #10239B ;
+}
 
