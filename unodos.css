@@ -6,6 +6,7 @@
 .board-container {
   border:5px solid black;
   color:white;
+/*  display:inline-block;*/
   margin:0 auto;
   padding-top:2.5px;
   text-align: center;
@@ -68,4 +69,16 @@
 .score-container, .timer-container {
   font-size: 3em;
   text-align: center;
+}
+
+.upcoming-container {
+  border-bottom:5px solid black;
+  border-right:5px solid black;
+  border-left:5px solid black;
+  display:inline-block;
+  margin:5px;
+}
+
+.upcoming-container ul {
+  list-style: none;
 }

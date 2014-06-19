@@ -3,10 +3,12 @@ $(document).ready(function(){
   this.timePassed = 0;
   this.timeMax = 2;
   this.timerSpeed = 1000;
-
+  this.timerState = 0;
+  this.timer
   // Timer function to trigger insert new tiles
 
-  this.timer = setInterval(function(){
+  function createTimer() {
+    setInterval(function(){
     if (_this.timePassed < _this.timeMax) {
       _this.timePassed = _this.timePassed + 1;
     } else {
@@ -14,12 +16,19 @@ $(document).ready(function(){
       checkAndInsert();
     }
     $(".timer-container").html(_this.timePassed)
-  }, _this.timerSpeed);
-  
+    }, _this.timerSpeed);
+  };
+
+  this.timer = createTimer();
+
   var gameBoard = new Board();
   gameBoard.build_board();
 
+  gameBoard.displayLetters = gameBoard.addLetters();
+
+  printUpcoming();
   printScore();
+  debugger;
 
   gameBoard.board[0][1].contents = "D";
   gameBoard.board[1][2].contents = "O";
@@ -122,13 +131,9 @@ $(document).ready(function(){
     word_coords = gameBoard.findWords(os_on_board);
 
     gameBoard.addWordColor(word_coords);
-
-    gameBoard.raiseScore(word_coords);
-
     gameBoard.removeWords(word_coords);
-
     gameBoard.removeWordColor(word_coords);
-
+    gameBoard.raiseScore(word_coords);
     printScore();
   };
 
@@ -136,33 +141,49 @@ $(document).ready(function(){
     if (gameBoard.boardFull() == true) {
       alert("Game Over!")
     } else {
-      gameBoard.shuffleLetters();
       letter = gameBoard.getLetter();
       emptyTile = gameBoard.findEmptyTile();
       gameBoard.insertTile(letter, emptyTile);
       gameBoard.showNewTileLetter(emptyTile);
+      printUpcoming();
+
       findAndRemoveWords();
+
       checkScoreModifyTimer();
     }
   };
 
   function checkScoreModifyTimer() {
-    if (gameBoard.score > 15) {
-      clearInterval(_this.timer);
-      _this.timerSpeed = 250;
-      
-    } else if (gameBoard.score > 10) {
-      clearInterval(_this.timer);
-      _this.timerSpeed = 500;
-    } else if (gameBoard.score > 1) {
-      debugger;
-      clearInterval(_this.timer);
-      _this.timerSpeed = 750;
+    if (gameBoard.score > 15 && _this.timerState == 2) {
+      delete _this.timer;
+      _this.timerSpeed = 900;
+      _this.timer = createTimer;
+      _this.timerState = 3;
+    } else if (gameBoard.score > 10 && _this.timerState == 1) {
+      delete _this.timer;
+      _this.timerSpeed = 925;
+      _this.timer = createTimer;
+      _this.timerState = 2;
+    } else if (gameBoard.score > 4 && _this.timerState == 0) {
+      delete _this.timer;
+      _this.timerSpeed = 950;
+      _this.timer = createTimer();
+      _this.timerState = 1;
     }
+
   };
 
   function printScore() {
     $(".score-container").html(gameBoard.score);
+  };
+
+  function printUpcoming() {
+    $(".upcoming-container").html("");
+    var lettersList = "<ul>";
+    for (var i = 0; i < 5; i++) {
+      lettersList += "<li>" + gameBoard.letters[i] + "</li>"
+    }
+    $(".upcoming-container").append(lettersList + "</ul>");
   };
 
   /////////////////////////////////////

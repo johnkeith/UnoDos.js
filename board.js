@@ -1,8 +1,34 @@
 function Board () {
   this.board = [];
-  this.letters = ["U","N","O","D","S"]
+  this.letters = ["U","N","O","D","S","O"]
+  this.moveToDisplay = [];
+  this.displayLetters = [];
   this.score = 0;
 };
+
+Board.prototype.shuffleLetters = function(lettersSet) {
+  return lettersSet.sort(function() {return 0.5 - Math.random();});
+};
+
+Board.prototype.getLetter = function() {
+  if (this.moveToDisplay.length == 0){
+    this.moveToDisplay = this.addLetters();
+    this.displayLetters.push(this.moveToDisplay.splice(0,1).toString());
+  } else {
+    this.displayLetters.push(this.moveToDisplay.splice(0,1).toString());
+  }
+  return this.displayLetters.splice(0,1);
+};
+
+Board.prototype.addLetters = function() {
+  var lettersArray = [];
+  var letters_randomized = this.shuffleLetters(this.letters);
+  for (var i = 0; i < letters_randomized.length; i++) {
+    lettersArray.push(letters_randomized[i]);
+  }
+  return lettersArray;
+};
+
 
 Board.prototype.build_board = function() {
   for (var i = 0; i < 5; i++) {
@@ -28,14 +54,6 @@ Board.prototype.boardFull = function() {
     }
   });
   return empty;
-};
-
-Board.prototype.shuffleLetters = function() {
-  this.letters.sort(function() {return 0.5 - Math.random();});
-};
-
-Board.prototype.getLetter = function() {
-  return this.letters[0];
 };
 
 Board.prototype.findEmptyTile = function() {
@@ -186,7 +204,7 @@ Board.prototype.removeWords = function(word_coords) {
       _removeWordsThis.board[coords[0]][coords[1]].contents = " ";
       $(".tile[data-row=" + coords[0] + "][data-col=" + coords[1] + "]").find('.contents').html(" ");
     });
-  }, 500);
+  }, 100);
 };
 
 Board.prototype.addWordColor = function(word_coords) {
