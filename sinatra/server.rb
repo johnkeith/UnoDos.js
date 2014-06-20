@@ -3,7 +3,6 @@ require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
 
-
 # require all of the models and view templates
 Dir['app/**/*.rb'].each { |file| require_relative file }
 
@@ -15,13 +14,20 @@ get '/' do
 end
 
 get '/game' do
+  @
   haml :game
 end
 
 post '/game' do
-  Score.create(player_name: params[:player_name], score: params[:score])
+  if !params[:player_name].nil?
+    Score.create(player_name: params[:player_name], score: params[:score])
+  end
+  binding.pry
   redirect '/highscores'
 end
+
+post '/token' do
+  end
 
 get '/highscores' do
   @scores = Score.order("score DESC")

@@ -199,7 +199,6 @@ $(document).ready(function(){
       _this.timer = createTimer();
       _this.timerState = 1;
     }
-
   };
 
   function printScore() {
