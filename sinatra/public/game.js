@@ -5,8 +5,45 @@ $(document).ready(function(){
   this.timeMax = 2;
   this.timerSpeed = 1000;
   this.timerState = 0;
-  this.timer
-  // Timer function to trigger insert new tiles
+  this.timer;
+
+  var gameBoard = new Board();
+  gameBoard.build_board();
+
+  gameBoard.displayLetters = gameBoard.addLetters();
+
+  printUpcoming();
+  
+  printScore();
+
+  function drawBoard() {
+    $.each(gameBoard.board, function(row_idx, row) {
+      var rowContainer = "<div class='row'>";
+      $.each(row, function(col_idx, col) {
+        rowContainer += "<div data-row='" + row_idx + "' data-col='" + col_idx + "' class='tile'>" +
+                        "<div class='contents'>" + col.contents + "</div>" +
+                        "<div class='up-button'></div><div class='down-button'></div>" +
+                        "<div class='right-button'></div><div class='left-button'></div>" +
+                        "</div>"
+      });
+      rowContainer += "</div>"
+      $('.board-container').append(rowContainer);
+    });
+  };
+
+  drawBoard();
+
+  function fillBoardAtStart() {
+    $.each(gameBoard.letters, function(index, letter){
+      emptyTile = gameBoard.findEmptyTile();
+      gameBoard.insertTile(letter, emptyTile);
+      row = emptyTile[0];
+      col = emptyTile[1];
+      $(".tile[data-row=" + row + "][data-col=" + col + "]").find('.contents').html(letter)
+    });
+  }
+
+  fillBoardAtStart();
 
   function fillTimerDots() {
 
@@ -48,55 +85,6 @@ $(document).ready(function(){
   $(".timer-box-01").html("&middot;");
   
   this.timer = createTimer();
-
-  var gameBoard = new Board();
-  gameBoard.build_board();
-
-  gameBoard.displayLetters = gameBoard.addLetters();
-
-  printUpcoming();
-  
-  printScore();
-
-  gameBoard.board[0][1].contents = "D";
-  gameBoard.board[1][2].contents = "O";
-  gameBoard.board[0][3].contents = "S";
-
-  gameBoard.board[2][2].contents = "U";
-  gameBoard.board[3][3].contents = "N";
-  gameBoard.board[2][4].contents = "O";
-
-  gameBoard.board[3][1].contents = "D";
-  gameBoard.board[3][2].contents = "O";
-  gameBoard.board[3][3].contents = "S";
-
-  gameBoard.board[4][2].contents = "U";
-  gameBoard.board[4][3].contents = "N";
-  gameBoard.board[4][4].contents = "O";
-
-  gameBoard.board[0][1].contents = "D";
-  gameBoard.board[1][2].contents = "O";
-  gameBoard.board[0][3].contents = "S";
-
-  gameBoard.board[0][0].contents = "U";
-  gameBoard.board[1][0].contents = "N";
-  gameBoard.board[2][0].contents = "O";
-  
-  function drawBoard() {
-    $.each(gameBoard.board, function(row_idx, row) {
-      var rowContainer = "<div class='row'>";
-      $.each(row, function(col_idx, col) {
-        rowContainer += "<div data-row='" + row_idx + "' data-col='" + col_idx + "' class='tile'>" +
-                        "<div class='contents'>" + col.contents + "</div>" +
-                        "<div class='up-button'></div><div class='down-button'></div>" +
-                        "<div class='right-button'></div><div class='left-button'></div>" +
-                        "</div>"
-      });
-      rowContainer += "</div>"
-      $('.board-container').append(rowContainer);
-    });
-  }
-  drawBoard();
 
   // Move Listeners //
 
