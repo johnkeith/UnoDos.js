@@ -15,6 +15,11 @@ body {
 .gif-centered{
   text-align: center;
 }
+.scores-table {
+  font-size: 1.5em;
+  margin:30px auto;
+  width:550px;
+}
 .scores-table li {
   display:inline-block;
 }
@@ -28,10 +33,7 @@ body {
   display: inline;
   letter-spacing:-10px
 }
-.scores-table {
-  font-size: 1.5em;
-  margin:30px auto;
-}
+
 .scores-table tr {
   padding:20px;
 }
@@ -72,6 +74,7 @@ body {
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   font-size: 2em;
+  float:right;
 }
 .play-button:hover {
   background: RGB(0, 190, 255);

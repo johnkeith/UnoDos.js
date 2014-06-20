@@ -24,6 +24,6 @@ post '/game' do
 end
 
 get '/highscores' do
-  @scores = Score.all
+  @scores = Score.order("score DESC")
   haml :highscores
 end
